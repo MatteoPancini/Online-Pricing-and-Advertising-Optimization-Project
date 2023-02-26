@@ -67,3 +67,4 @@ plt.ylabel('Regret')
 plt.xlabel('t')
 plt.show()
 
+#This is the demonstration that the SWTS is better performing
