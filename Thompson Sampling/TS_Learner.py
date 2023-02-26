@@ -1,5 +1,11 @@
-import numpy as np
+"""Initialize the prior distribution for each arm.
+Sample a value from each arm's prior distribution.
+Select the arm with the highest sampled value.
+Observe the reward for the selected arm.
+Update the prior distribution of the selected arm based on the observed reward.
+Repeat steps 2-5 for a fixed number of iterations or until convergence"""
 
+import numpy as np
 from Learner import *
 
 class TS_Learner(Learner):
