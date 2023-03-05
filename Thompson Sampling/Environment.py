@@ -1,7 +1,7 @@
-#Environment Class is defined by:
-#Number of arms, probability distribution for each arm reward function
-#The environment interacts with the learner by returning a stochastic reward
-#depending on the pulled arm
+"""Environment Class is defined by:
+Number of arms, probability distribution for each arm reward function
+The environment interacts with the learner by returning a stochastic reward
+depending on the pulled arm"""
 
 import numpy as np
 class Environment():
