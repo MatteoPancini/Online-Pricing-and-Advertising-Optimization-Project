@@ -18,9 +18,9 @@ class UCB_Matching(UCB):
     def update(self, pulled_arms, rewards):
         self.t += 1
         pulled_arm_flat = np.ravel_multi_index(pulled_arms,(self.n_rows, self.n_cols))
-        for a in range(self.n_arms):
-            n_samples = len(self.rewards_per_arm[a])
-            self.confidence[a] = (2 * np.log(self.t) / n_samples) ** 0.5 if n_samples > 0 else np.inf
         for pulled_arm, reward in zip(pulled_arm_flat, rewards):
             self.update_observations(pulled_arm, reward)
             self.empirical_means[pulled_arm] = (self.empirical_means[pulled_arm]*(self.t-1) + reward)/self.t
+        for a in range(self.n_arms):
+            n_samples = len(self.rewards_per_arm[a])
+            self.confidence[a] = (2 * np.log(self.t) / n_samples) ** 0.5 if n_samples > 0 else np.inf
