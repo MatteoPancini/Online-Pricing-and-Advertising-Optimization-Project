@@ -41,7 +41,7 @@ for i in range(0, n_obs):
     l = 1.0
     kernel = C(theta, (1e-3, 1e3)) * RBF(l, (1e-3, 1e3))
     # Initialize the Gaussian Process Regressor and fit it to the data
-    gp = GaussianProcessRegressor(kernel=kernel, alpha=noise_std**2, normalize_y=True, n_restarts_optimizer=10)
+    gp = GaussianProcessRegressor(kernel=kernel, alpha=noise_std**2, normalize_y=False, n_restarts_optimizer=10)
     gp.fit(X,Y)
     # Generate predictions for the bid range using the trained GP
     x_pred = np.atleast_2d(bids).T
