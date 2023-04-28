@@ -21,6 +21,7 @@ class TS_Learner(Learner):
         return idx
 
     def update(self, pulled_arm, reward):
+        #Updates the beta parameters based on the pulled arm and the reward from the environment.
         self.t +=1
         self.update_observations(pulled_arm, reward)
         self.beta_parameters[pulled_arm, 0] = self.beta_parameters[pulled_arm,0] + reward

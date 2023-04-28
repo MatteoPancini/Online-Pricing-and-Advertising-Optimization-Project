@@ -1,11 +1,11 @@
-##Defined by the number of arms it can pull, the current round and the list of
-#collected rewards
-#The learner interacts with the environment by selecting the arm to pull at each round and
-#observing the reward given by the environment
+"""Defined by the number of arms it can pull, the current round and the list of
+collected rewards. The learner interacts with the environment by selecting the arm to pull at each round and
+observing the reward given by the environment"""
 
 import numpy as np
 
 class Learner:
+    #Initializes the Learner class with the number of arms, and creates empty lists for rewards per arm and collected rewards.
     def __init__(self, n_arms):
         self.n_arms = n_arms
         self.t = 0

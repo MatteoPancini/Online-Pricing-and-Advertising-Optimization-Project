@@ -1,20 +1,26 @@
+"""This file runs two learners, TS_Learner and Greedy_Learner,
+on a multi-armed bandit problem with a given set of arm probabilities.
+It calculates and plots the regret of each learner over a given number
+ of experiments and time steps."""
+
 import numpy as np
 import matplotlib.pyplot as plt
 from Environment import *
 from TS_Learner import *
 from Greedy_Learner import *
-
+# Define the problem settings
 n_arms = 4
-p = np.array([0.15, 0.1, 0.1, 0.35])
-opt = p[3]
+p = np.array([0.15, 0.1, 0.1, 0.35]) #probabilities of success for each arm
+opt = p[3] #optimal arm is the one with the highest probability of success
 
-T = 300
+T = 300 #time steps for each experiment
 
 n_experiments = 1000
 
-ts_rewards_per_experiment = []
-gr_reward_per_experiment = []
+ts_rewards_per_experiment = [] #list to store the collected rewards for TS_Learner over each experiment
+gr_reward_per_experiment = [] #list to store the collected rewards for Greedy_Learner over each experiment
 
+# Loop over the experiments
 for e in range (0, n_experiments):
     env = Environment(n_arms=n_arms, probabilities = p)
     ts_learner = TS_Learner(n_arms=n_arms)
