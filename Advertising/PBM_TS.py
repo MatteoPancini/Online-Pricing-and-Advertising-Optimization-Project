@@ -31,7 +31,7 @@ class PBM_TS(Learner):
             a = self.S_kl[arm, pos]
             b = self.N_kl[arm, pos] - self.S_kl[arm, pos]
             p += sc.xlog1py(b, -theta*pos_prob) + sc.xlogy(a, theta)
-            p -= sc.betaln(a,b)
+            p = sc.betaln(a,b)
             p += a*np.log(pos_prob)
         return np.exp(p)
     def _rejection_sample(self, arm):
