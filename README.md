@@ -7,8 +7,8 @@ Consider a setting in which an e-commerce website sells a product and can contro
 
 We assume that a round corresponds to one day. The users are characterized as follows.
 Two binary features can be observed by the advertising platform, call them F1 and F2; users can be of three different classes according to these features, call them C1, C2, C3; these three classes differ in terms of:
-the function that expresses the number of daily clicks as the bid varies, and
-the function that assigns the cumulative daily cost of the clicks as the bid varies.
+- the function that expresses the number of daily clicks as the bid varies, and
+- the function that assigns the cumulative daily cost of the clicks as the bid varies.
 The three classes (C1, C2, and C3) also distinguish in terms of purchase conversion rate. More precisely, they differ in terms of the function expressing how the conversion probability varies as the price varies. 
 
 The construction of the environment can be done as follows.
