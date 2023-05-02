@@ -1,0 +1,30 @@
+# Data files
+data
+
+# Environment variables
+.venv
+venv
+.env
+
+# Python
+**/__pycache__
+.mypy_cache
+
+# VS code
+.vscode/settings.json
+
+# IntelliJ
+**/.idea/*
+
+# MacOSX
+.DS_Store
+
+.ipynb_checkpoints
+
+# SQLite
+*.db
+*.db-journal
+
+# CSV files
+*.csv
+submission.csv
