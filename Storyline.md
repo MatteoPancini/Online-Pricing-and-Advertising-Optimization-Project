@@ -1,5 +1,5 @@
 # The Product
-We want to place on the market a new marketplace selling the most fashionable shoes.
+We want to place on the market a new marketplace selling the most fashionable shoes: nAIke.
 Shoes market is growing every year. Moreover, the online market is growing faster than the offline one.
 This is a good product to analyze because it fits quite well with the parameters to settle by the experiment such as 
 the possibility to diversify for different group of users. 
