@@ -22,6 +22,7 @@ class UserClass():
         if self.name == 'C3':
             #Giovane non appassionato
             return (1.0 - np.exp(-5.0*bid)) * 50
+
     def get_total_cost(self, bid):
         cost_bid = (np.log(bid+1)**0.5)*3
         return cost_bid * self.get_click_bids(bid)
@@ -40,16 +41,6 @@ class Environment():
         func = self.classes[index].get_click_bids(bid)
         return func + np.random.normal(0, noise_std, size = func.shape)
 
-    def get_cumulative_cost(self, bid, noise_std, index):
-        clicks = self.classes[index].get_click_bids(bid)
-        avg_cost = clicks * 2.5
-        #avg_cost = np.cumsum(clicks) / np.arange(1, len(clicks) + 1) ** 0.725  # define a concave average cost curve
-
-        return avg_cost + np.random.normal(0, noise_std, size=avg_cost.shape)  # add Gaussian noise to the average cost
-
-    #def get_cumulative_cost(self, bid, noise_std):
-    #    clicks = self.classes[0].get_click_bids(bid)
-    #    return np.cumsum(clicks + np.random.normal(0, noise_std, size=clicks.shape))
 
 env = Environment()
 n_obs = 10 #just for simplicity
