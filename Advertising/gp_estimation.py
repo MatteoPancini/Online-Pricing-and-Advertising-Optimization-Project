@@ -5,10 +5,10 @@ from sklearn.gaussian_process.kernels import RBF, ConstantKernel as C
 
 # Define a function that returns the expected number of clicks for a given bid value
 def n(x):
-    # This function is used to generate the "true" click values, which are then perturbed with noise to generate observed clicks
+    # Given a bid x, returns the expected number of clicks
     return (1.0 - np.exp(-5.0*x)) * 100
 
-# Define a function that generates observed click values by adding noise to the expected click value
+# Define a function that generates observed click values by adding noise to the expected number of click value
 def generate_observations(x, noise_std):
     return n(x) + np.random.normal(0, noise_std, size = n(x).shape)
 
@@ -29,7 +29,7 @@ for i in range(0, n_obs):
     x_obs = np.append(x_obs, new_x_obs)
     y_obs = np.append(y_obs, new_y_obs)
 
-# To use Gaussian processes, we need to normalize the data. In this case, the data is already normalized.
+# To use Gaussian processes, we need to normalize the data. In this case, the data is already normalized (from 0 to 1).
 # Then specify a kernel function, a good choice is to set scale = l = 1.
 # We train the GP and estimate the hyperparameters by maximizing the marginal likelihood.
     # Convert the bid and click observations to arrays and normalize the data

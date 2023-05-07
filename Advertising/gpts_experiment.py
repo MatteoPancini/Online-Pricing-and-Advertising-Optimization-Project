@@ -20,10 +20,12 @@ for e in range(0, n_experiments):
     gts_learner = GTS_Learner(n_arms=n_arms)
     gpts_learner = GPTS_Learner(n_arms=n_arms, arms=bids)
     for t in range(0,T):
+        #Gaussian Thompson Sampling
         pulled_arm = gts_learner.pull_arm()
         reward = env.round(pulled_arm)
         gts_learner.update(pulled_arm, reward)
 
+        #GP Thompson Sampling
         pulled_arm = gpts_learner.pull_arm()
         reward = env.round(pulled_arm)
         gpts_learner.update(pulled_arm,reward)

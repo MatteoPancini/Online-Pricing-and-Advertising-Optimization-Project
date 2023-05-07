@@ -15,13 +15,13 @@ class UserClass():
     def get_click_bids(self, bid):
         if self.name == 'C1':
             #Giovane Appassionato
-            return (1.0 - np.exp(-10.0*bid)) * 200
+            return (1.0 - np.exp(-5.0*bid)) * 200
         if self.name == 'C2':
             #Adulto appassionato
             return (1.0 - np.exp(-5.0*bid)) * 100
         if self.name == 'C3':
             #Giovane non appassionato
-            return (1.0 - np.exp(-3.0*bid)) * 50
+            return (1.0 - np.exp(-5.0*bid)) * 50
 
 
 class Environment():
