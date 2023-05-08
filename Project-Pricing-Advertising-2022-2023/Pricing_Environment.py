@@ -22,24 +22,25 @@ class Environment_Pricing():
         self.time += 1
         return reward
 
-env = Environment_Pricing()
-x = env.prices              # list of prices
-classes = env.classes # list of categories
+if __name__ == "__main":
+    env = Environment_Pricing()
+    x = env.prices              # list of prices
+    classes = env.classes # list of categories
 
-colors = ['r', 'g', 'b']
-plt.figure(figsize=(14,8))
-for i in range(len(classes)):
-    for j in range(len(env.prices)):
-        y = classes[i].get_conversion_probabilities()
-        smooth = interp1d(x, y, kind='cubic')
-        plt.plot(x, smooth(x), color=colors[i], label = classes[i].name)
-        plt.scatter(x, y, color=colors[i])
-        plt.title("Conversion Rates")
-        plt.xlabel("Price (€)")
-        plt.ylabel("Conversion Rate")
+    colors = ['r', 'g', 'b']
+    plt.figure(figsize=(14,8))
+    for i in range(len(classes)):
+        for j in range(len(env.prices)):
+            y = classes[i].get_conversion_probabilities()
+            smooth = interp1d(x, y, kind='cubic')
+            plt.plot(x, smooth(x), color=colors[i], label = classes[i].name)
+            plt.scatter(x, y, color=colors[i])
+            plt.title("Conversion Rates")
+            plt.xlabel("Price (€)")
+            plt.ylabel("Conversion Rate")
 
-    plt.legend()
-    plt.show()
+        plt.legend()
+        plt.show()
 #env = Environment_Pricing()
 #purchases = []
 #for i in range(1000):
