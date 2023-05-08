@@ -24,9 +24,8 @@ class UserClass():
     #Returns the function matching bid to total cost considering clicks per bid
     def get_total_cost(self, bid):
         #Sublinear cost function
-        cost_bid = (np.log(bid+1)**0.5)*3
+        cost_bid = (np.log(bid+1)**0.5)*2
         return cost_bid * self.get_click_bids(bid)
-
     #Defines probabilities for conversion rates of each class
     def get_conversion_probabilities(self):
         if self.name == 'C1':

@@ -39,8 +39,9 @@ for t in range(0,T):# Generate observations by randomly selecting bids and addin
     #plt.figure(i)
         #Computation done for class 0, get total cost by multiplying the two functions
         cost_curve = env.classes[0].get_total_cost(x_pred)
-        plt.plot(x_pred, (np.log(x_pred+1)**0.5)*3, 'r:', label=r'$Bid-Cost$')
-        plt.plot(x_pred, (1.0 - np.exp(-5.0 * x_pred)) * 200, 'g:', label=r'$Bid-Click$')
+        cost_curve = cost_curve + np.random.normal(0, noise_std,size = cost_curve.shape)
+        plt.plot(x_pred, (np.log(x_pred+1)**0.5)*2, 'r:', label=r'$Bid-Cost$')
+        #plt.plot(x_pred, (1.0 - np.exp(-5.0 * x_pred)) * 200, 'g:', label=r'$Bid-Click$')
         plt.xlabel('$Bid$')
         plt.ylabel('$Click$')
         plt.legend(loc = 'lower right')
@@ -49,7 +50,7 @@ for t in range(0,T):# Generate observations by randomly selecting bids and addin
 #print(x_pred)
 plt.figure()
 #total cumulative day average by dividing by 365
-plt.plot(x_pred, total_cost/T, 'b:', label='Average Cumulative Daily Click Cost')
+plt.plot(x_pred, total_cost/T, 'b:', label='Average Cumulative Daily Click Cost for C1')
 plt.xlabel('$Bid$')
 plt.ylabel('$Cost$')
 plt.legend(loc='upper left')
