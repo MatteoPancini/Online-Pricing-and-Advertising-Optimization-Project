@@ -6,7 +6,7 @@ from User_Classes import *
 
 
 #Definition of Advertising Environment
-class Environment():
+class Advertising_Environment():
     def __init__(self):
         #Class vector
         self.classes = [
@@ -20,7 +20,7 @@ class Environment():
         return func + np.random.normal(0, noise_std, size = func.shape)
 
 if __name__ == "__main__":
-    env = Environment()
+    env = Advertising_Environment()
     n_obs = 1 #just for simplicity
     noise_std = 5.0
     bids = np.linspace(0.0, 3, 20)
