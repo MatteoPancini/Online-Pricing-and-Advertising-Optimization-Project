@@ -10,9 +10,9 @@ class Advertising_Environment():
     def __init__(self):
         #Class vector
         self.classes = [
-            UserClass('C1',0,0),
-            UserClass('C2',0,1),
-            UserClass('C3',1,0)
+            UserClass(name = 'C1'),
+            UserClass(name = 'C2'),
+            UserClass(name = 'C3')
             ]
     #Adds gaussian noise to bid-click function
     def generate_observations(self, noise_std, bid, index):

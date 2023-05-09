@@ -6,9 +6,9 @@ from User_Classes import *
 class Environment_Pricing():
     def __init__(self):
         self.classes = [
-            UserClass('C1', 0, 0),
-            UserClass('C2', 0, 1),
-            UserClass('C3', 1, 0)
+            UserClass(name = 'C1'),
+            UserClass(name = 'C2'),
+            UserClass(name = 'C3')
         ]
         self.prices = [50, 100, 150, 200, 250]
 
