@@ -1,4 +1,4 @@
-from Learner import Learner
+from bandit_algorithms.Learner import Learner
 import numpy as np
 
 class PBM_UCB(Learner):

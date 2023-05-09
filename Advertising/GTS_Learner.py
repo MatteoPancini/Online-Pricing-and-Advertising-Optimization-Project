@@ -1,7 +1,7 @@
 #import sys
 #sys.path.insert(0, '..\Bandit Algorithms\Learner.py')
 
-from Learner import *
+from bandit_algorithms.Learner import *
 
 class GTS_Learner(Learner):
     def __init__(self, n_arms):

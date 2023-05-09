@@ -1,4 +1,4 @@
-from Environment import Environment
+from bandit_algorithms.Environment import Environment
 import numpy as np
 
 class Environment_PBM(Environment):

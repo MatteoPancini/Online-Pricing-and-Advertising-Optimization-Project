@@ -1,4 +1,4 @@
-from Learner import Learner
+from bandit_algorithms.Learner import Learner
 import numpy as np
 import scipy.stats
 import scipy.special as sc

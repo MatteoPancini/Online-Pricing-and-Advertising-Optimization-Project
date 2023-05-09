@@ -1,5 +1,5 @@
 import numpy as np
-
+import matplotlib.pyplot as plt
 class UserClass():
     '''
     Defines the 3 user classes and their bid-click curve, bid-price curve and price conversion probabilities
@@ -50,7 +50,7 @@ class UserClass():
     def get_total_cost(self, bid):
         '''Returns the function matching the bid to the total cost, considering the number of clicks per bid'''
         #Sublinear cost function
-        cost_bid = (np.log(bid+1)**0.5)*2
+        cost_bid = (np.log(bid+1))
         return cost_bid * self.get_click_bids(bid)
     #Defines probabilities for conversion rates of each class
     def get_conversion_probabilities(self):
@@ -64,3 +64,12 @@ class UserClass():
             # Giovane non appassionato
             return [0.7, 0.5, 0.4, 0.3, 0.2]
     #oppure tutte curve tipo \frac{1}{1+e^{\left(4x-5\right)}}
+
+c = UserClass('C1')
+bids = np.linspace(0.0, 1, 20)
+x_pred = np.atleast_2d(bids).T
+plt.plot(x_pred, np.log(x_pred+1), 'r:', label=r'Bid-Cost Total')
+plt.xlabel('$Bid$')
+plt.ylabel('$Cost')
+plt.legend(loc = 'lower right')
+plt.show()
