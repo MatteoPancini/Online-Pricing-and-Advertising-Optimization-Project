@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 from User_Classes import *
 
-class Environment_Pricing():
+class Environment_Pricing(): #m
     def __init__(self):
         self.classes = [
             UserClass(name = 'C1'),
@@ -11,13 +11,14 @@ class Environment_Pricing():
             UserClass(name = 'C3')
         ]
         self.prices = [50, 100, 150, 200, 250]
+        self.time = 0
 
-    def get_conversion_price_probability(self, index,price):
-        prob = self.classes[index].get_conversion_probabilities()[price]
+    def get_conversion_price_probability(self, class_index, price):
+        prob = self.classes[class_index].get_conversion_probabilities()[price]
         return prob
 
-    def round(self, index,price):
-        p = self.get_conversion_price_probability(index, price)
+    def round(self, class_index, price):
+        p = self.get_conversion_price_probability(class_index, price)
         reward = np.random.binomial(1, p)
         self.time += 1
         return reward

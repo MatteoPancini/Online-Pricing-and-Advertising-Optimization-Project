@@ -4,18 +4,18 @@ class UserClass():
     '''
     Defines the 3 user classes and their bid-click curve, bid-price curve and price conversion probabilities
         F1	F2	C
-        0	0	0
-        0	1	1
-        1	*	2
+        0	0	1
+        0	1	2
+        1	*	3
     '''
 
     def __init__(self, name = None, f1 = None, f2 = None):
         if name != None:
             self.name = name
-            if self.name == "C0":
+            if self.name == "C1":
                 self.f1 = 0
                 self.f2 = 0
-            elif self.name == "C1":
+            elif self.name == "C2":
                 self.f1 = 0
                 self.f2 = 1
             else:
@@ -25,11 +25,11 @@ class UserClass():
             self.f1 = f1
             self.f2 = f2
             if f1 == 1:
-                self.name = "C2"
+                self.name = "C3"
             elif f2 == 1:
-                self.name = "C1"
+                self.name = "C2"
             else: 
-                self.name = "C0"        
+                self.name = "C1"        
 
     # In the context of bidding in online advertising, a function that represents the
     # dependence between the number of clicks and the bid should be bounded

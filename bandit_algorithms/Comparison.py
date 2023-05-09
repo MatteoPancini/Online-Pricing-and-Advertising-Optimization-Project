@@ -13,7 +13,7 @@ n_arms = 4
 p = np.array([0.15, 0.1, 0.1, 0.35]) #probabilities of success for each arm
 opt = p[3] #optimal arm is the one with the highest probability of success
 
-T = 300 #time steps for each experiment
+T = 300 #time steps for each experiment 
 
 n_experiments = 1000
 
