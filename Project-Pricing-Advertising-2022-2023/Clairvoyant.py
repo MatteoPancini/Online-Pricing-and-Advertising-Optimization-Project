@@ -50,3 +50,8 @@ total_reward = sum([calculate_reward_for_class(i, prices.index(optimal_prices[i]
 print("Optimal Prices: ", optimal_prices)
 print("Optimal Bids: ", optimal_bids)
 print("Total Reward: ", total_reward)
+
+'''Optimal Prices:  [200, 200, 150]
+Optimal Bids:  [0.7777777777777778, 0.8686868686868687, 0.7575757575757577]
+Total Reward:  23368.721467413303
+'''
