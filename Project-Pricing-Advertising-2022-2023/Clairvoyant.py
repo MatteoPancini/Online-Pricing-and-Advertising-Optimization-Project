@@ -1,10 +1,11 @@
 from User_Classes import UserClass
 from Advertising_Environment import Advertising_Environment
 import numpy as np
+import matplotlib.pyplot as plt
 
 classes = [UserClass('C1'), UserClass('C2'), UserClass('C3')]
 prices = [50,100,150,200,250]
-
+bid_values = np.linspace(0, 1, num=100)
 #Bid-Cost curve
 def bid_cost_fn(bid):
     return np.log(bid+1)
@@ -12,17 +13,16 @@ def bid_cost_fn(bid):
 ad_env = Advertising_Environment()
 # Define function to calculate daily reward for a single class
 def calculate_reward_for_class(class_index, price_index, bid):
-    clicks = ad_env.generate_observations(10,bid, class_index)
+    clicks = ad_env.generate_observations(2,bid, class_index)
     conversion_prob = classes[class_index].get_conversion_probabilities()[price_index]
     margin = prices[price_index] - (prices[price_index]/100)*30
     #costs = clicks * bid_cost_fn(bid)
-    costs = ad_env.get_total_cost(5,bid,class_index)
+    costs = ad_env.get_total_cost(2,bid,class_index)
     reward = clicks * conversion_prob * margin - costs
     return reward
 
 # Define function to find the optimal bid for a single class
 def find_optimal_bid_for_class(class_index, price_index):
-    bid_values = np.linspace(0, 1, num=100)
     rewards = np.array([calculate_reward_for_class(class_index, price_index, bid) for bid in bid_values])
     optimal_bid_index = np.argmax(rewards)
     optimal_bid = bid_values[optimal_bid_index]
@@ -51,7 +51,8 @@ print("Optimal Prices: ", optimal_prices)
 print("Optimal Bids: ", optimal_bids)
 print("Total Reward: ", total_reward)
 
+
 '''Optimal Prices:  [200, 200, 150]
-Optimal Bids:  [0.7777777777777778, 0.8686868686868687, 0.7575757575757577]
-Total Reward:  23368.721467413303
+Optimal Bids:  [0.9595959595959597, 0.9797979797979799, 0.8282828282828284]
+Total Reward:  21441.417667270194
 '''
