@@ -15,14 +15,18 @@ class Advertising_Environment():
             UserClass(name = 'C3')
             ]
     #Adds gaussian noise to bid-click function
-    def generate_observations(self, noise_std, bid, index):
+    def generate_observations(self, noise_std_clicks, bid, index):
         func = self.classes[index].get_click_bids(bid)
-        return func + np.random.normal(0, noise_std, size = func.shape)
+        return func + np.random.normal(0, noise_std_clicks, size = func.shape)
+    def get_total_cost(self, noise_std_cost, bid, index):
+        func = self.classes[index].get_total_cost(bid)
+        return func + np.random.normal(0, noise_std_cost, size = func.shape)
 
 if __name__ == "__main__":
     env = Advertising_Environment()
     #n_obs = 1 #just for simplicity
-    noise_std = 5.0
+    noise_std_clicks = 10.0
+    noise_std_cost = 2.0
     bids = np.linspace(0.0, 1, 20)
     T = 365
     # Initialize arrays to store observed bids and clicks
@@ -31,8 +35,7 @@ if __name__ == "__main__":
     #total_cost= np.zeros(len(bids))
     bids = np.linspace(0.0, 1, 20)
     x_pred = np.atleast_2d(bids).T
-    cost_curve = env.classes[0].get_total_cost(x_pred) + np.random.normal(0, noise_std, size=(
-        env.classes[0].get_total_cost(x_pred)).shape)
+    cost_curve = env.get_total_cost(noise_std_cost, x_pred, 0)
     plt.plot(x_pred, cost_curve, 'r:', label=r'Bid-Cost Total')
     plt.xlabel('$Bid$')
     plt.ylabel('$Cost Total$')
