@@ -52,6 +52,7 @@ class UserClass():
         #Sublinear cost function
         cost_bid = (np.log(bid+1))
         return cost_bid * self.get_click_bids(bid)
+    
     #Defines probabilities for conversion rates of each class
     def get_conversion_probabilities(self):
         if self.name == 'C1':
@@ -64,12 +65,3 @@ class UserClass():
             # Giovane non appassionato
             return [0.7, 0.5, 0.4, 0.3, 0.2]
     #oppure tutte curve tipo \frac{1}{1+e^{\left(4x-5\right)}}
-
-c = UserClass('C1')
-bids = np.linspace(0.0, 1, 20)
-x_pred = np.atleast_2d(bids).T
-plt.plot(x_pred, np.log(x_pred+1), 'r:', label=r'Bid-Cost Total')
-plt.xlabel('$Bid$')
-plt.ylabel('$Cost')
-plt.legend(loc = 'lower right')
-plt.show()
