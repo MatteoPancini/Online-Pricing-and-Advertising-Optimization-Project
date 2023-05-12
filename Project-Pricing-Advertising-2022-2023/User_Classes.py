@@ -60,7 +60,7 @@ class UserClass():
             return [0.9, 0.7, 0.6, 0.5, 0.4]
         if self.name == 'C2':
             # Adulto appassionato
-            return [0.9, 0.7, 0.5, 0.4, 0.3]
+            return [0.8, 0.6, 0.5, 0.4, 0.3]
         if self.name == 'C3':
             # Giovane non appassionato
             return [0.7, 0.5, 0.4, 0.3, 0.2]

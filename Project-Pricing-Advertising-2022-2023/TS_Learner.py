@@ -17,6 +17,7 @@ class TS_Learner(Learner):
     #Sampling a value for each arm from a Beta and then select the arm associated to the
     #Beta that generated the sample with the max value
     def pull_arm(self):
+        print(self.beta_parameters)
         idx = np.argmax(np.random.beta(self.beta_parameters[:,0], self.beta_parameters[:,1]))
         return idx
 
