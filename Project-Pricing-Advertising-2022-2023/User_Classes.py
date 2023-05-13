@@ -29,7 +29,15 @@ class UserClass():
             elif f2 == 1:
                 self.name = "C2"
             else: 
-                self.name = "C1"        
+                self.name = "C1"
+
+        if self.name == 'C1':
+            self.user_index = 0
+        elif self.name == 'C2':
+            self.user_index = 1
+        elif self.name == 'C3':
+            self.user_index = 2
+
 
     # In the context of bidding in online advertising, a function that represents the
     # dependence between the number of clicks and the bid should be bounded
@@ -65,3 +73,12 @@ class UserClass():
             # Giovane non appassionato
             return [0.7, 0.5, 0.4, 0.3, 0.2]
     #oppure tutte curve tipo \frac{1}{1+e^{\left(4x-5\right)}}
+
+    def get_conversion_per_price(self, price):
+        '''Returns the conversion probability for the instanced class'''
+        return self.get_conversion_probabilities()[int(price/50 - 1)]
+
+    #Defines the cost per click for each class
+    def get_cost_per_click(self, bid):
+        '''Returns the cost per click for the instanced class'''
+        return self.get_total_cost(bid) / self.get_click_bids(bid)

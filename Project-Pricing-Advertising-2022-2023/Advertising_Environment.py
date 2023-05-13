@@ -4,7 +4,6 @@ from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import RBF, ConstantKernel as C
 from User_Classes import UserClass
 
-
 #Definition of Advertising Environment
 class Advertising_Environment():
     def __init__(self):
@@ -66,3 +65,8 @@ if __name__ == "__main__":
      #plt.ylabel('$Cost$')
     #plt.legend(loc='upper left')
     #plt.show()
+def calculate_margin(price):
+    return price - (price/100)*30
+
+def calculate_price_index(price):
+    return int(price/50 - 1)
