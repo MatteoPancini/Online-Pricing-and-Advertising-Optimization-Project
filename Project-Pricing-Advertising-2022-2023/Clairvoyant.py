@@ -1,5 +1,6 @@
 from User_Classes import UserClass
 from Advertising_Environment import Advertising_Environment
+from Advertising_Environment import calculate_margin
 import numpy as np
 import matplotlib.pyplot as plt
 np.random.seed(120)
@@ -14,10 +15,14 @@ def bid_cost_fn(bid):
 
 ad_env = Advertising_Environment()
 # Define function to calculate daily reward for a single class
+
+
 def calculate_reward_for_class(class_index, price_index, bid):
     clicks = ad_env.generate_observations(0.8,bid, class_index)
     conversion_prob = classes[class_index].get_conversion_probabilities()[price_index]
-    margin = prices[price_index] - (prices[price_index]/100)*30
+    #margin = prices[price_index] - (prices[price_index]/100)*30
+    margin = calculate_margin(prices[price_index])
+
     #costs = clicks * bid_cost_fn(bid)
     costs = ad_env.get_total_cost(0.2,bid,class_index)
     reward = clicks * conversion_prob * margin - costs

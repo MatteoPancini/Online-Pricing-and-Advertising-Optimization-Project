@@ -10,15 +10,14 @@ if __name__ == '__main__':
     position_prbabilities = np.array([0.9, 0.6, 0.3])
     n_pos = 3
     n_arms = 5
-    T = 3000
+    T = 2
     opt = (np.sort(arm_probabilities)[::-1][:n_pos] * position_prbabilities).sum()
     print(opt)
-    n_experiments = 50
+    n_experiments = 2
     ts_rewards_per_experiment = []
     ucb_rewards_per_experiment = []
 
     for e in range(n_experiments):
-        print(e)
         env = Environment_PBM(n_arms=n_arms, n_positions=3, arm_probabilities=arm_probabilities,
                              position_probabilities=position_prbabilities)
         ts_learner = PBM_TS(n_arms, n_pos, np.array([0.9, 0.6, 0.3]), M=10)
@@ -37,6 +36,7 @@ if __name__ == '__main__':
     plt.figure(0)
     plt.ylabel("Regret")
     plt.xlabel("t")
+    print(ts_rewards_per_experiment)
     plt.plot(np.cumsum(np.mean(opt - ts_rewards_per_experiment, axis=0)), 'r')
     plt.plot(np.cumsum(np.mean(opt - ucb_rewards_per_experiment, axis=0)), 'b')
     plt.legend(["TS", "UCB"])
