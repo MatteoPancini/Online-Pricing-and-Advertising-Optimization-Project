@@ -3,7 +3,7 @@ from Advertising_Environment import Advertising_Environment
 from Advertising_Environment import calculate_margin
 import numpy as np
 import matplotlib.pyplot as plt
-np.random.seed(120)
+np.random.seed(15)
 
 
 classes = [UserClass('C1'), UserClass('C2'), UserClass('C3')]
@@ -18,13 +18,13 @@ ad_env = Advertising_Environment()
 
 
 def calculate_reward_for_class(class_index, price_index, bid):
-    clicks = ad_env.generate_observations(0.8,bid, class_index)
+    clicks = ad_env.generate_observations(0,bid, class_index)
     conversion_prob = classes[class_index].get_conversion_probabilities()[price_index]
     #margin = prices[price_index] - (prices[price_index]/100)*30
     margin = calculate_margin(prices[price_index])
 
     #costs = clicks * bid_cost_fn(bid)
-    costs = ad_env.get_total_cost(0.2,bid,class_index)
+    costs = ad_env.get_total_cost(0,bid,class_index)
     reward = clicks * conversion_prob * margin - costs
     return reward
 
@@ -60,6 +60,7 @@ print("Total Reward: ", total_reward)
 
 
 '''Optimal Prices:  [200, 200, 150]
-Optimal Bids:  [1.0, 0.9797979797979799, 0.7171717171717172]
-Total Reward:  21362.277885204443
+Optimal Bids:  [0.9797979797979799, 0.9191919191919192, 0.8989898989898991]
+Total Reward:  21296.95276923974
+
 '''
