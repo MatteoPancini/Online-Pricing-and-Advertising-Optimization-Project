@@ -76,7 +76,7 @@ if __name__ == "__main__":
         optimal_prices.append(optimal_class_price)
         optimal_bids.append(optimal_class_bid)
 
-    # Calculate total reward
+# Calculate total reward
     total_reward = sum([calculate_reward_for_class(i, prices.index(optimal_prices[i]) , optimal_bids[i]) for i in range(0,3)])
     print("Optimal Prices: ", optimal_prices)
     print("Optimal Bids: ", optimal_bids)
