@@ -84,6 +84,6 @@ print("Total Reward: ", total_reward)
 
 
 '''Optimal Prices:  [200, 200, 150]
-Optimal Bids:  [0.9595959595959597, 0.9797979797979799, 0.8282828282828284]
+Optimal Bids:  [1.0,1.0,1.0]
 Total Reward:  21441.417667270194
 '''
