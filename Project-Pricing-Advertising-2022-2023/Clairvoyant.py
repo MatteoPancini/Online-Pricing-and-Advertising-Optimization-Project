@@ -3,8 +3,6 @@ from Advertising_Environment import Advertising_Environment
 from Advertising_Environment import calculate_margin
 import numpy as np
 import matplotlib.pyplot as plt
-np.random.seed(15)
-
 
 classes = [UserClass('C1'), UserClass('C2'), UserClass('C3')]
 prices = [50,100,150,200,250]
@@ -35,22 +33,48 @@ def find_optimal_bid_for_class(class_index, price_index):
     optimal_bid = bid_values[optimal_bid_index]
     return optimal_bid, rewards[optimal_bid_index]
 
-# Find optimal prices and bids for each class
-optimal_prices = []
-optimal_bids = []
-for i in range(len(classes)):
-    optimal_class_price = None
-    optimal_class_bid = None
+
+
+
+def get_optimal_parameters(class_index):
+    i = class_index
+
     optimal_class_reward = -np.inf
     for j in range(len(prices)):
         optimal_price = prices[j]
         optimal_bid, reward = find_optimal_bid_for_class(i, j)
         if reward > optimal_class_reward:
-            optimal_class_price = optimal_price
-            optimal_class_bid = optimal_bid
             optimal_class_reward = reward
-    optimal_prices.append(optimal_class_price)
-    optimal_bids.append(optimal_class_bid)
+
+    return optimal_price, optimal_bid
+
+classes = [UserClass('C1'), UserClass('C2'), UserClass('C3')]
+prices = [50,100,150,200,250]
+bid_values = np.linspace(0, 1, num=100)
+
+ad_env = Advertising_Environment()
+
+if __name__ == "__main__":
+
+
+
+
+    # Find optimal prices and bids for each class
+    optimal_prices = []
+    optimal_bids = []
+    for i in range(len(classes)):
+        optimal_class_price = None
+        optimal_class_bid = None
+        optimal_class_reward = -np.inf
+        for j in range(len(prices)):
+            optimal_price = prices[j]
+            optimal_bid, reward = find_optimal_bid_for_class(i, j)
+            if reward > optimal_class_reward:
+                optimal_class_price = optimal_price
+                optimal_class_bid = optimal_bid
+                optimal_class_reward = reward
+        optimal_prices.append(optimal_class_price)
+        optimal_bids.append(optimal_class_bid)
 
 # Calculate total reward
 total_reward = sum([calculate_reward_for_class(i, prices.index(optimal_prices[i]) , optimal_bids[i]) for i in range(0,3)])
@@ -60,7 +84,6 @@ print("Total Reward: ", total_reward)
 
 
 '''Optimal Prices:  [200, 200, 150]
-Optimal Bids:  [0.9797979797979799, 0.9191919191919192, 0.8989898989898991]
-Total Reward:  21296.95276923974
-
+Optimal Bids:  [0.9595959595959597, 0.9797979797979799, 0.8282828282828284]
+Total Reward:  21441.417667270194
 '''
