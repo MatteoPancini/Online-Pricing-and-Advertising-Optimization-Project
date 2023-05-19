@@ -30,7 +30,7 @@ class Environment_Pricing(): #m
         #reward = clicks * conversion_prob * margin - costs
 
         p = self.get_conversion_price_probability(class_index, price_index)
-        reward = np.random.binomial(1, p) 
+        reward = np.random.binomial(1, p)
         self.time += 1
         return reward
 
