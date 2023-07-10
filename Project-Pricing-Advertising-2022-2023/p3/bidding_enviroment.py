@@ -4,7 +4,7 @@ from utils.tools import fun
 class BiddingEnvironment:
     def __init__(self, bids, sigma, user_class, price, n_arms):
         self.bids = bids
-        self.means = self.initialize_means(user_class=user_class, bids=bids, price=price)
+        self.means = self.initialize_means(user_class=user_class, bids=bids, price=price) # Mean per bid
         self.sigmas = np.ones(len(bids)) * sigma
         self.price = price
         self.n_arms = n_arms
