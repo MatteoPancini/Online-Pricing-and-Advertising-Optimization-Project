@@ -13,9 +13,10 @@ class TS_Learner(Learner):
         idx = np.argmax(np.random.beta(self.beta_parameters[:,0], self.beta_parameters[:,1]))
         return idx
 
-    def update(self, pulled_arm, reward):
+    def update(self, pulled_arm, alpha, beta, reward):
         #Updates the beta parameters based on the pulled arm and the reward from the environment.
         self.t +=1
-        self.update_observations(pulled_arm, reward[2])
-        self.beta_parameters[pulled_arm, 0] = self.beta_parameters[pulled_arm,0] + reward[0]
-        self.beta_parameters[pulled_arm,1] = self.beta_parameters[pulled_arm,1] + reward[1]
+        self.update_observations(pulled_arm, reward)
+        #print(f"reward {reward},\talpha {alpha},\tbeta {beta}")
+        self.beta_parameters[pulled_arm, 0] = self.beta_parameters[pulled_arm,0] + alpha
+        self.beta_parameters[pulled_arm,1] = self.beta_parameters[pulled_arm,1] + beta
