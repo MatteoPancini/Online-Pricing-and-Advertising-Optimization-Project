@@ -1,4 +1,4 @@
-from bandit_algorithms.Learner import *
+from utils.learners.Learner import Learner
 import numpy as np
 from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import RBF, ConstantKernel as C

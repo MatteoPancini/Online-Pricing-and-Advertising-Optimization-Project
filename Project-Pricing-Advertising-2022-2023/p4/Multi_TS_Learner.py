@@ -1,6 +1,6 @@
 import numpy as np
-from GPTS_learner import *
-from TS_learner import *
+from p4.GPTS_learner import *
+from p4.TS_learner import *
 
 class Multi_TS_Learner():
     def __init__(self, bids_arms, prices_arms):
