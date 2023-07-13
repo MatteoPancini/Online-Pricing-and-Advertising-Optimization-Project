@@ -28,7 +28,6 @@ def calculate_reward_for_class(class_index, price_index, bid):
 # Define function to find the optimal bid for a single class
 def find_optimal_bid_for_class(class_index, price_index):
     rewards = np.array([calculate_reward_for_class(class_index, price_index, bid) for bid in bid_values])
-    print(bid_values)
     optimal_bid_index = np.argmax(rewards)
     optimal_bid = bid_values[optimal_bid_index]
     return optimal_bid, rewards[optimal_bid_index]
