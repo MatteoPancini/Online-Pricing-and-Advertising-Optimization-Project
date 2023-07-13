@@ -5,7 +5,7 @@ import numpy as np
 
 classes = [UserClass('C1'), UserClass('C2'), UserClass('C3')]
 prices = [50,100,150,200,250]
-bid_values = np.linspace(0, 1, num=100)
+bid_values = np.linspace(0.01, 3, num=100)
 #Bid-Cost curve
 def bid_cost_fn(bid):
     return np.log(bid+1)
@@ -28,6 +28,7 @@ def calculate_reward_for_class(class_index, price_index, bid):
 # Define function to find the optimal bid for a single class
 def find_optimal_bid_for_class(class_index, price_index):
     rewards = np.array([calculate_reward_for_class(class_index, price_index, bid) for bid in bid_values])
+    print(bid_values)
     optimal_bid_index = np.argmax(rewards)
     optimal_bid = bid_values[optimal_bid_index]
     return optimal_bid, rewards[optimal_bid_index]
@@ -46,12 +47,6 @@ def get_optimal_parameters(class_index):
             optimal_class_reward = reward
 
     return optimal_price, optimal_bid
-
-classes = [UserClass('C1'), UserClass('C2'), UserClass('C3')]
-prices = [50,100,150,200,250]
-bid_values = np.linspace(0, 1, num=100)
-
-ad_env = Advertising_Environment()
 
 if __name__ == "__main__":
 
