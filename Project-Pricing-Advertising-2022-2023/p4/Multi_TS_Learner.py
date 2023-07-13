@@ -16,14 +16,24 @@ class Multi_TS_Learner():
         self.collected_rewards = np.array([])
         self.prices = [50, 100, 150, 200, 250]
 
-    def update_observations(self, reward): #appends to the rewards
+    def update_observations(self, reward):
         self.collected_rewards = np.append(self.collected_rewards, reward)
+
+    def update_observations_bulk(self, rewards):
+        self.update_observations(rewards)
 
     def update(self, pulled_bids_arm, pulled_prices_arm, n_conversions, n_clicks, cum_cost, reward):
         self.update_observations(reward) #saves the reward
         self.n_click_learner.update(pulled_bids_arm, n_clicks) #update pricing
         self.cum_cost_learner.update(pulled_bids_arm, cum_cost) #update advertising
         self.price_learner.update(pulled_prices_arm, n_conversions, n_clicks - n_conversions, reward) #update basic price
+
+
+    def update_bulk(self, pulled_bids_arms, pulled_prices_arms, n_conversions_per_arm, n_clicks_per_arm, cum_cost_per_arm, reward_per_arm):
+        self.update_observations_bulk(reward_per_arm)
+        self.n_click_learner.update_bulk(pulled_bids_arms, n_clicks_per_arm)
+        self.cum_cost_learner.update_bulk(pulled_bids_arms, cum_cost_per_arm)
+        self.price_learner.update_bulk(pulled_prices_arms, [n_conversions_per_arm, n_clicks_per_arm - n_conversions_per_arm, reward_per_arm])
 
     def pull_arms(self):
         sampled_price_index = self.price_learner.pull_arm()

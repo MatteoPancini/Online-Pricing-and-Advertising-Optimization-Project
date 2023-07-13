@@ -33,3 +33,12 @@ class GPTS_Learner(Learner):
     def pull_arm(self):
         sampled_values = np.random.normal(self.means, self.sigmas)
         return np.argmax(sampled_values)
+
+    def update_observations_bulk(self, pulled_arms, rewards):
+        for sample in range(len(pulled_arms)):
+            self.update_observations(pulled_arms[sample], rewards[sample])
+
+    def update_bulk(self, pulled_arms, rewards):
+        self.t += len(pulled_arms)
+        self.update_observations_bulk(pulled_arms, rewards)
+        self.update_model()
