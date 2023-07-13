@@ -65,13 +65,13 @@ class UserClass():
     def get_conversion_probabilities(self):
         if self.name == 'C1':
             # Giovane Appassionato
-            return [0.9, 0.7, 0.6, 0.5, 0.4]
+            return [0.20, 0.30, 0.25, 0.15, 0.10]
         if self.name == 'C2':
             # Adulto appassionato
-            return [0.8, 0.6, 0.5, 0.4, 0.3]
+            return [0.10, 0.20, 0.25, 0.25, 0.20]
         if self.name == 'C3':
             # Giovane non appassionato
-            return [0.7, 0.5, 0.4, 0.3, 0.2]
+            return [0.30, 0.25, 0.2, 0.15, 0.10]
     #oppure tutte curve tipo \frac{1}{1+e^{\left(4x-5\right)}}
 
     def get_conversion_per_price(self, price):

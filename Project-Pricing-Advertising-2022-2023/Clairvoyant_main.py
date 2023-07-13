@@ -19,7 +19,8 @@ if __name__ == "__main__":
     print("Total Reward: ", sum(optimal_rewards))
 
 
-'''Optimal Prices:  [200, 200, 150]
-Optimal Bids:  [1.0,1.0,1.0]
-Total Reward:  21441.417667270194
+'''
+Optimal Prices:  [150, 250, 150]
+Optimal Bids:  [1.1274747474747475, 1.187878787878788, 1.0670707070707073]
+Total Reward:  9502.35354550117
 '''
