@@ -1,4 +1,4 @@
-from Learner import Learner
+from utils.learners.Learner import Learner
 import numpy as np
 
 class UCB(Learner):

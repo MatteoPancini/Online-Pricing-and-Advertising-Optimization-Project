@@ -1,8 +1,7 @@
-from User_Classes import UserClass
-from Advertising_Environment import Advertising_Environment
-from Advertising_Environment import calculate_margin
+from utils.User_Classes import UserClass
+from p1.advertising_environment import Advertising_Environment
+from utils.tools import calculate_margin
 import numpy as np
-import matplotlib.pyplot as plt
 
 classes = [UserClass('C1'), UserClass('C2'), UserClass('C3')]
 prices = [50,100,150,200,250]

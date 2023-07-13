@@ -1,9 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
-from User_Classes import *
-from Advertising_Environment import Advertising_Environment
-
+from utils.User_Classes import *
+from p1.advertising_environment import Advertising_Environment
+    
 class Environment_Pricing(): #m
     def __init__(self, n_arms, p):
         self.classes = [
@@ -23,14 +23,11 @@ class Environment_Pricing(): #m
 
     def round(self, class_index, price_index, bid=1):
         prices = [50,100,150,200,250]
-        #clicks = self.ad_env.generate_observations(noise_std_clicks=2, bid=bid, index=class_index)
-        #conversion_prob = self.classes[class_index].get_conversion_probabilities()[price_index]
-        #margin = prices[price_index] - (prices[price_index]/100)*30
-        #costs = self.ad_env.get_total_cost(noise_std_cost=2, bid=bid, index=class_index)
-        #reward = clicks * conversion_prob * margin - costs
-
-        p = self.get_conversion_price_probability(class_index, price_index)
-        reward = np.random.binomial(1, p)
+        clicks = self.ad_env.generate_observations(noise_std_clicks=0, bid=bid, index=class_index)
+        conversion_prob = np.random.binomial(1, self.get_conversion_price_probability(0, price_index))
+        margin = prices[price_index] - (prices[price_index]/100)*30
+        costs = self.ad_env.get_total_cost(noise_std_cost=0, bid=bid, index=class_index)
+        reward = clicks * conversion_prob * margin - costs
         self.time += 1
         return reward
 
