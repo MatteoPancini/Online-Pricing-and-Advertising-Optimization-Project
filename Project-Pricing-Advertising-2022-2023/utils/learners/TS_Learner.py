@@ -6,7 +6,7 @@ Update the prior distribution of the selected arm based on the observed reward.
 Repeat steps 2-5 for a fixed number of iterations or until convergence"""
 
 import numpy as np
-from Learner import *
+from utils.learners.Learner import *
 
 class TS_Learner(Learner):
     def __init__(self, n_arms):
@@ -17,7 +17,10 @@ class TS_Learner(Learner):
     #Sampling a value for each arm from a Beta and then select the arm associated to the
     #Beta that generated the sample with the max value
     def pull_arm(self):
-        idx = np.argmax(np.random.beta(self.beta_parameters[:,0], self.beta_parameters[:,1]))
+        #valid_b_values array is created by replacing any non-positive values 
+        # in self.beta_parameters[:, 1] with 1.
+        valid_b_values = np.where(self.beta_parameters[:, 1] <= 0, 1, self.beta_parameters[:, 1])
+        idx = np.argmax(np.random.beta(self.beta_parameters[:, 0], valid_b_values))
         return idx
 
     def update(self, pulled_arm, reward):
