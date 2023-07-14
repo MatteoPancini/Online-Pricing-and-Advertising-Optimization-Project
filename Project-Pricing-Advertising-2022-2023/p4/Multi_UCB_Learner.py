@@ -21,11 +21,14 @@ class Multi_UCB_Learner():
     def update_observations(self, reward):
         self.collected_rewards = np.append(self.collected_rewards, reward)
 
+    def update_observations_bulk(self, rewards):
+        self.update_observations(rewards)
+
     def update(self, pulled_bids_arm, pulled_prices_arm, n_conversions, n_clicks, cum_cost, reward):
         self.update_observations(reward)
         self.n_click_learner.update(pulled_bids_arm, n_clicks)
         self.cum_cost_learner.update(pulled_bids_arm, cum_cost)
-        self.price_learner.update(pulled_prices_arm, [n_conversions, n_clicks - n_conversions, reward])
+        self.price_learner.update_simple(pulled_prices_arm, [n_conversions, n_clicks - n_conversions, reward])
 
     def update_bulk(self, pulled_bids_arms, pulled_prices_arms, n_conversions_per_arm, n_clicks_per_arm, cum_cost_per_arm, reward_per_arm):
         self.update_observations_bulk(reward_per_arm)
