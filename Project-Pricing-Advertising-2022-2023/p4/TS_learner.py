@@ -18,8 +18,8 @@ class TS_Learner(Learner):
         self.t +=1
         self.update_observations(pulled_arm, reward)
         #print(f"reward {reward},\talpha {alpha},\tbeta {beta}")
-        self.beta_parameters[pulled_arm, 0] = self.beta_parameters[pulled_arm,0] + beta
-        self.beta_parameters[pulled_arm,1] = self.beta_parameters[pulled_arm,1] + alpha
+        self.beta_parameters[pulled_arm, 0] = self.beta_parameters[pulled_arm,0] + alpha
+        self.beta_parameters[pulled_arm,1] = self.beta_parameters[pulled_arm,1] + beta
 
     def update_bulk(self, pulled_arms, rewards):
         for i, arm in enumerate(pulled_arms):
