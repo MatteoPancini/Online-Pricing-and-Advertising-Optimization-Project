@@ -3,51 +3,52 @@ from sklearn.gaussian_process.kernels import RBF, ConstantKernel as C
 import numpy as np
 from utils.learners.Learner import Learner
 
+#This learner consider the clicks and the cost
 class GPTS_Learner3(Learner):
     def __init__(self, n_arms, arms):
         super().__init__(n_arms)
         self.arms = arms
-        self.means = np.zeros(self.n_arms)
-        self.sigmas = np.ones(self.n_arms)*10
+        self.clicks_means = np.zeros(self.n_arms)
+        self.clicks_sigmas = np.ones(self.n_arms)
+        self.cost_means = np.zeros(self.n_arms)
+        self.cost_sigmas = np.ones(self.n_arms)
         self.pulled_arms = []
-        alpha = 10.0
-        #kernel = C(1.0, (1e-3, 1e3)) * RBF(1.0, (1e-3, 1e3))
-        #kernel_BlueCow
-        kernel = C(100, (100, 1e6)) * RBF(1, (1e-1, 1e1))
-        self.gp = GaussianProcessRegressor(kernel=kernel, alpha = alpha**2, normalize_y=True, n_restarts_optimizer= 9)
+        self.collected_clicks = []
+        self.collected_costs = []
+        alpha_clicks = 1000
+        kernel_clicks = C(100, (100, 1e6)) * RBF(10, (1e-1, 1e6))
+        self.gp_clicks = GaussianProcessRegressor(kernel=kernel_clicks, alpha=alpha_clicks, normalize_y=False, n_restarts_optimizer=1)
 
-#Override to update the value of the pulled arms list
-    def update_observations(self, arm_idx, reward):
-        super().update_observations(arm_idx, reward)
-        self.pulled_arms.append(self.arms[arm_idx])
-#update the means and sigmas with the new predictions
+        alpha_cost = 0.3
+        kernel_cost = C(0.1, (1, 1e2)) * RBF(0.1, (1, 1e2))
+        self.gp_cost = GaussianProcessRegressor(kernel=kernel_cost, alpha=alpha_cost, normalize_y=False, n_restarts_optimizer=1)
+
+    def update_observations_gpts(self, pulled_arm, clicks, costs):
+        # self.rewards_per_arm[pulled_arm].append(reward)
+        self.collected_clicks = np.append(self.collected_clicks, clicks)
+        self.collected_costs = np.append(self.collected_costs, costs)
+        self.pulled_arms.append(self.arms[pulled_arm])
+
     def update_model(self):
         x = np.atleast_2d(self.pulled_arms).T
-        y = self.collected_rewards
-        self.gp.fit(x,y)
-        self.means, self.sigmas = self.gp.predict(np.atleast_2d(self.arms).T, return_std=True)
-        self.sigmas = np.maximum(self.sigmas, 1e-2)
-#calls both update lists
-    def update(self, pulled_arm, reward):
+        y = self.collected_clicks
+        self.gp_clicks.fit(x, y)
+        self.clicks_means, self.clicks_sigmas = self.gp_clicks.predict(np.atleast_2d(self.arms).T, return_std=True)
+        self.clicks_sigmas = np.maximum(self.clicks_sigmas, 30)
+
+        x = np.atleast_2d(self.pulled_arms).T
+        y = self.collected_costs
+        self.gp_cost.fit(x, y)
+        self.cost_means, self.cost_sigmas = self.gp_cost.predict(np.atleast_2d(self.arms).T, return_std=True)
+        self.cost_sigmas = np.maximum(self.cost_sigmas, 0.01)
+
+    def update(self, pulled_arm, clicks, costs):
         self.t += 1
-        self.update_observations(pulled_arm, reward)
+        self.update_observations_gpts(pulled_arm, clicks, costs)
         self.update_model()
-#returns the index of the max value drawn from the arm normal distribution
-    def pull_arm(self, pricing_learner, price_idx, margin):
-        if self.t < self.n_arms:
-            return self.t  # % self.n_arms
 
-        try:
-            conv_rate = pricing_learner.beta_parameters[price_idx, 0] / (pricing_learner.beta_parameters[price_idx, 0]
-                                                                         + pricing_learner.beta_parameters[
-                                                                             price_idx, 1])
-        except ZeroDivisionError:
-            conv_rate = 0
-            print('DIV 0')
-        poisson = pricing_learner.poisson_vector[price_idx, 0] + 1
-
-        exp_rew = np.random.normal(self.acc_means * (np.ones(shape=self.n_arms)
-                                                     * margin * conv_rate * poisson - self.cost_means), 50)
+    def pull_arm(self, conv_rate, margin):
+        exp_rew = np.random.normal(self.clicks_means * (np.ones(shape=self.n_arms) * margin * conv_rate - self.cost_means), 50) #TODO: check if a variance of 50 is ok
         bid_idx = np.argmax(exp_rew)
 
         return bid_idx

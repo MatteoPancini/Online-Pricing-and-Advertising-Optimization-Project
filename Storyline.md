@@ -5,10 +5,8 @@ This is a good product to analyze because it fits quite well with the parameters
 the possibility to diversify for different group of users. 
 Moreover they adapt to changes in the market both from a trend, seasonality and influencing factors point of view, causing smooth 
 or abrupt variations in the demand.
-For sick of semplicity we will consider only a small subset of shoes:
-+ Designer Sneakers
+For sick of semplicity we will consider only a type of shoes:
 + Trekking Boots
-+ Sandals
 
 # Customers
 We will consider three different groups of customers, based on the following feature set:
