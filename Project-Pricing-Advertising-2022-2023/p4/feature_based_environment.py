@@ -1,6 +1,6 @@
 import numpy as np
 from utils.User_Classes import UserClass
-
+from utils.parameters import clicks_sigma, cost_sigma
 
 class Environment:
     def __init__(self, feature):
@@ -22,8 +22,8 @@ class Environment:
     def round(self, pulled_bids_arm, pulled_prices_arm):
         bid = self.bids[pulled_bids_arm]
         price = self.prices[pulled_prices_arm]
-        n_clicks = np.round(max(0,self.user_class.get_click_bids(bid) + np.random.normal(0, 10))).astype(np.int32)
-        cum_cost = max(0, self.user_class.get_total_cost(bid) + np.random.normal(0, 200))
+        n_clicks = np.round(max(0,self.user_class.get_click_bids(bid) + np.random.normal(0, clicks_sigma))).astype(np.int32)
+        cum_cost = max(0, self.user_class.get_total_cost(bid) + np.random.normal(0, cost_sigma))
         result = np.random.binomial(1, self.pricing_probabilities[pulled_prices_arm], n_clicks)
         reward = np.sum(result) * (price - price*0.3) - cum_cost
         return np.sum(result), n_clicks, cum_cost, reward
