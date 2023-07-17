@@ -11,7 +11,7 @@ class GPUCBLearner(Learner):
         self.arms = arms
         self.confidence = np.array([np.inf] * self.n_arms)
         self.empirical_means = np.zeros(self.n_arms)
-        self.sigmas = np.ones(self.n_arms) * 10
+        self.sigmas = np.ones(self.n_arms) * 7
         self.pulled_arms = []
         alpha = 1.0
         kernel = RBF(1.0, (1e-3, 1e3))

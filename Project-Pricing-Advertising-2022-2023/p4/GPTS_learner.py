@@ -8,7 +8,7 @@ class GPTS_Learner(Learner):
         super().__init__(arms.shape[0])
         self.arms = arms
         self.means = np.zeros(self.n_arms)
-        self.sigmas = np.ones(self.n_arms)*10
+        self.sigmas = np.ones(self.n_arms)*7
         self.pulled_arms = []
         alpha = 1.0
         kernel = RBF(1.0, (1e-3, 1e3))
