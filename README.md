@@ -1,5 +1,5 @@
 # Online Learning Applications Project
-## Pricing and Advertising
+### Pricing and Advertising
 
 ## About
 
