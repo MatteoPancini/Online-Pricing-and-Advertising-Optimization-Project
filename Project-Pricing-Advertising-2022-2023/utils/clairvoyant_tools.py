@@ -1,7 +1,7 @@
 from p1.advertising_environment import Advertising_Environment
 from utils.tools import calculate_margin
 import numpy as np
-from utils.parameters import classes, prices, bid_values
+from utils.projectParameters import classes, prices, bid_values
 
 ad_env = Advertising_Environment()
 

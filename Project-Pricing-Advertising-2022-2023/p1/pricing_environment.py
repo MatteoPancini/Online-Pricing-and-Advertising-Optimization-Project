@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 from utils.User_Classes import *
 from p1.advertising_environment import Advertising_Environment
-from utils.parameters import cost_sigma, clicks_sigma
+from utils.projectParameters import cost_sigma, clicks_sigma
     
 class Environment_Pricing(): #m
     def __init__(self, n_arms, p):

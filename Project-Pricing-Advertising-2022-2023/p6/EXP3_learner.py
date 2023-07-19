@@ -7,7 +7,7 @@ import numpy as np
 from utils.learners.Learner import Learner
 import random
 from math import sqrt, log
-import utils.parameters as param
+import utils.projectParameters as param
 
 class EXP3(Learner):
     def __init__(self, n_arms, upperbound_total_reward=1.0, reward_min=0.0, reward_max=1.0):

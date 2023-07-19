@@ -1,4 +1,15 @@
 import numpy as np
+from utils.User_Classes import UserClass
+
+
+n_arms = 100
+
+classes = [UserClass('C1'), UserClass('C2'), UserClass('C3')]
+prices = [50, 100, 150, 200, 250]
+bid_values = np.linspace(0.01, 3, num=100)
+
+clicks_sigma = 20
+cost_sigma = 7
 
 bids = np.linspace(0.01, 3, 100)
 prices = np.array([50, 100, 150, 200, 250])

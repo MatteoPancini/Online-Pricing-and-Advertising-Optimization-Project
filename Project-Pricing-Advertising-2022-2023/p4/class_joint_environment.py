@@ -1,6 +1,6 @@
 import numpy as np
 from utils.User_Classes import UserClass
-from utils.parameters import clicks_sigma, cost_sigma
+from utils.projectParameters import clicks_sigma, cost_sigma
 
 class Environment:
     def __init__(self, user_class):

@@ -16,17 +16,6 @@ import matplotlib.pyplot as plt
 from p1.pricing_environment import *
 from p1.TS_learner import TS_Learner
 from tqdm import tqdm
-from utils.parameters import *
-
-
-# ## Working in the enviroment
-
-# In[75]:
-
-
-optimum_price, optimum_bid, opt = get_optimal_parameters(uc1.user_index)
-optimum_price
-
 
 # In[62]:
 

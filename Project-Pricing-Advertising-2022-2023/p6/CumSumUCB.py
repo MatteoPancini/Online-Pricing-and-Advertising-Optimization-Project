@@ -1,6 +1,6 @@
 from utils.learners.Learner import Learner
 import numpy as np
-import utils.parameters as param
+import utils.projectParameters as param
 
 
 class UCBLearner(Learner):
