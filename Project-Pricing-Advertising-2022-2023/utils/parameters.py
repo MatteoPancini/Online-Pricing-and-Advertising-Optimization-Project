@@ -9,3 +9,7 @@ bid_values = np.linspace(0.01, 3, num=100)
 
 clicks_sigma = 20
 cost_sigma = 7
+
+
+feature_combos = ['00', '01', '10', '11']
+features_names = ["F1", "F2"]
