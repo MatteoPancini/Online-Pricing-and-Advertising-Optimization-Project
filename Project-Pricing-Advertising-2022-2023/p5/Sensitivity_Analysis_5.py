@@ -2,15 +2,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-
-import utils.projectParameters as parameters
 import utils.UCB_SW as swucb
 import utils.UCB_Cusum as cusumucb
 import Environment5 as env
 import utils.UCB_Opt5 as ucb_opt
-#%%
-np.random.seed(parameters.seed)
 
+#%%
 T = 365
 class_id = 1
 env = env.Environment5(class_id, T)
@@ -24,6 +21,7 @@ h = 0.5 * np.log(T)
 alpha = np.sqrt(5 * np.log(T) / T)
 
 n_experiments = 100
+
 #%% md
 # 1. UCB-SW
 print("UCB-SW")
@@ -47,7 +45,7 @@ for index, window_size in enumerate(window_sizes):
             swucb_learner.update(pulled_arm_price, reward)
         swucb_rewards_per_experiment_per_parameters.append(swucb_learner.collected_rewards)
         cumregret_swucb_per_parameters.append(np.cumsum(opt - swucb_rewards_per_experiment_per_parameters[e]))
-    plt.plot(np.mean(cumregret_swucb_per_parameters, axis=0), label=f'SW={window_size}')
+    plt.plot(np.mean(cumregret_swucb_per_parameters, axis=0), label=f'SW={window_sizes}')
     plt.fill_between(range(T), np.mean(cumregret_swucb_per_parameters, axis=0) - np.std(cumregret_swucb_per_parameters, axis=0),
                     np.mean(cumregret_swucb_per_parameters, axis=0) + np.std(cumregret_swucb_per_parameters, axis=0), alpha=0.2)
 plt.legend()

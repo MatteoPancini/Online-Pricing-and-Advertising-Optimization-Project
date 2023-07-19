@@ -11,9 +11,8 @@ class GPTS_Learner(Learner):
         self.sigmas = np.ones(self.n_arms)*10
         self.pulled_arms = []
         alpha = 10.0
-        #kernel = C(1.0, (1e-3, 1e3)) * RBF(1.0, (1e-3, 1e3))
-        #kernel_BlueCow
-        kernel = C(100, (100, 1e6)) * RBF(1, (1e-1, 1e1))
+        kernel = C(1.0, (1e-3, 1e3)) * RBF(1.0, (1e-3, 1e3))
+        #kernel = C(100, (100, 1e6)) * RBF(1, (1e-1, 1e1))
         self.gp = GaussianProcessRegressor(kernel=kernel, alpha = alpha**2, normalize_y=True, n_restarts_optimizer= 9)
 
 #Override to update the value of the pulled arms list
@@ -27,11 +26,13 @@ class GPTS_Learner(Learner):
         self.gp.fit(x,y)
         self.means, self.sigmas = self.gp.predict(np.atleast_2d(self.arms).T, return_std=True)
         self.sigmas = np.maximum(self.sigmas, 1e-2)
+
 #calls both update lists
     def update(self, pulled_arm, reward):
         self.t += 1
         self.update_observations(pulled_arm, reward)
         self.update_model()
+
 #returns the index of the max value drawn from the arm normal distribution
     def pull_arm(self):
         sampled_values = np.random.normal(self.means, self.sigmas)

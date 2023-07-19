@@ -6,8 +6,8 @@ import utils.projectParameters as param
 
 
 class Environment5:
-    def __init__(self, user_class_id, T):
-        self.user_class_id = user_class_id
+    def __init__(self, user_class, T):
+        self.user_class_id = user_class.get_user_index() + 1
         self.T = T
         self.pricing_prob_per_phase = param.pricing_probabilities_per_phase
         self.n_phases = 3
@@ -37,11 +37,11 @@ class Environment5:
     def round(self, pulled_price_arm, pulled_bid_arm, t):
         phase = min(math.floor(t / self.phase_size) + 1, self.n_phases)
 
-        result = np.random.binomial(1, self.pricing_prob_per_phase[phase][pulled_price_arm], self.n_clicks[pulled_bid_arm]) # Simulation of the clicks of the users
+        sampled_clicks = np.random.binomial(1, self.pricing_prob_per_phase[phase][pulled_price_arm], self.n_clicks[pulled_bid_arm]) # Simulation of the clicks of the users
 
-        reward = np.sum(result) * (param.prices[pulled_price_arm] - param.cost) - self.tot_costs[pulled_bid_arm] # Calculation of rewards
+        daily_reward = np.sum(sampled_clicks) * (param.prices[pulled_price_arm] - param.cost) - self.tot_costs[pulled_bid_arm] # Calculation of rewards
 
-        return np.sum(result), self.n_clicks[pulled_bid_arm] - np.sum(result), reward, result   # Users who clicked, users who didn't click, reward, users who clicked (1) and users who didn't click (0)
+        return np.sum(sampled_clicks), self.n_clicks[pulled_bid_arm] - np.sum(sampled_clicks), daily_reward, sampled_clicks   # Users who clicked, users who didn't click, daily_reward, users who clicked (1) and users who didn't click (0)
 
     def get_optimal_price(self, t):
         phase = min(math.floor(t / self.phase_size) + 1, self.n_phases)
