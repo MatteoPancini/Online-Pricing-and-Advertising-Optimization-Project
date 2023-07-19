@@ -27,7 +27,6 @@ class Environment6_2:
         phase = (math.floor(t / self.phase_size)) % self.n_phases + 1
         result = np.random.binomial(1, self.probabilities[phase][pulled_arm], self.n_clicks)
         reward = np.sum(result) * (param.prices[pulled_arm] - param.cost) - self.cum_costs
-
         return np.sum(result), self.n_clicks - np.sum(result), reward, result
 
     def get_opt(self, t):
@@ -37,8 +36,8 @@ class Environment6_2:
     def get_opt_arm(self, t):
         phase = (math.floor(t / self.phase_size)) % self.n_phases + 1
         return self.optimal_price_idx[phase]
+    
     def compute_reward_max(self): # not used
-
         return np.max(list(self.optimal.values()))
 
 
