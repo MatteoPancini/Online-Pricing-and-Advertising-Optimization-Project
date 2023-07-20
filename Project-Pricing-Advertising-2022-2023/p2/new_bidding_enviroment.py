@@ -9,11 +9,20 @@ class Bidding_Environment_2:
         self.user_id = user_class.get_user_index() + 1
         self.pricing_probabilities = param.pricing_probabilities_per_user[self.user_id]
         self.optimal_price_index = np.argmax(self.pricing_probabilities)
+        self.conversion_rate_per_user = self.pricing_probabilities[
+                           self.optimal_price_index]
         self.clicks_means = self.initialize_clicks(user_class=user_class, bids=bids)
         self.cost_means = self.initialize_cost(user_class=user_class, bids=bids)
         self.clicks_sigmas = np.ones(len(bids)) * clicks_sigma
         self.cost_sigmas = np.ones(len(bids)) * cost_sigma
+
         self.n_arms = n_arms
+        self.n_clicks = np.round(param.n_clicks_per_bid_per_class[self.user_id](param.bids)).astype(np.int32)
+        self.cum_costs = param.total_cost_per_bid_per_class[self.user_id](param.bids)
+
+
+        self.optimal_bid = np.max(self.pricing_probabilities[self.optimal_price_index] * self.n_clicks * (
+                    param.prices[self.optimal_price_index] - param.cost) - self.cum_costs)
 
     def initialize_clicks(self, user_class, bids):
         means = np.zeros(len(bids))
@@ -38,9 +47,7 @@ class Bidding_Environment_2:
         if int(sample_clicks) < 0:
             sample_clicks = self.clicks_means[pulled_arm]
 
-        daily_reward = self.pricing_probabilities[
-                           self.optimal_price_index] * sample_clicks * calculate_margin(
-            param.prices[self.optimal_price_index]) - sample_cost
-
+        daily_reward = self.conversion_rate_per_user * calculate_margin(
+            param.prices[self.optimal_price_index]) - sample_cost * sample_clicks
 
         return daily_reward
