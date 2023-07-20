@@ -21,7 +21,7 @@ class EXP3(Learner):
         self.reward_min = reward_min  # the min of all the price phases
         self.reward_max = reward_max  # the max of all price phases
         upperbound_total_reward_scaled = (upperbound_total_reward - self.reward_min) / (self.reward_max - self.reward_min)
-        exponential = 2.7182818284
+        exponential = 3
         self.gamma = min(1.0, sqrt(n_arms * log(n_arms) / (upperbound_total_reward_scaled * (exponential - 1))))
         # self.gamma = np.sqrt(2*log(n_arms)/(n_arms*upperbound_total_reward))
 

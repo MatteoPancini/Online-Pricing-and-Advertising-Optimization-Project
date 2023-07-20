@@ -21,13 +21,14 @@ class Environment6_2:
         self.n_arms = len(param.prices)
         
         for phase in range(1, self.n_phases + 1):
-            self.optimal_price_idx[phase] = np.argmax(self.pricing_probabilities_per_phase[phase]*(param.prices-param.cost))
-            self.optimal[phase] = self.pricing_probabilities_per_phase[phase][self.optimal_price_idx[phase]] * self.n_clicks * (param.prices[self.optimal_price_idx[phase]] - param.cost) - self.cum_costs
+            self.optimal_price_idx[phase] = np.argmax(self.pricing_probabilities_per_phase[phase]*(np.array(param.prices)*0.7))
+            self.optimal[phase] = self.pricing_probabilities_per_phase[phase][self.optimal_price_idx[phase]] * self.n_clicks * (param.prices[self.optimal_price_idx[phase]]*0.7) - self.cum_costs
+            print(f"phase {phase}\tclass {self.class_id}: best price is {param.prices[self.optimal_price_idx[phase]]}")
 
     def round(self, pulled_arm, t):
         phase = (math.floor(t / self.phase_size)) % self.n_phases + 1
         result = np.random.binomial(1, self.pricing_probabilities_per_phase[phase][pulled_arm], self.n_clicks)
-        reward = np.sum(result) * (param.prices[pulled_arm] - param.cost) - self.cum_costs
+        reward = np.sum(result) * (param.prices[pulled_arm] * 0.7) - self.cum_costs
         return np.sum(result), self.n_clicks - np.sum(result), reward, result
 
     def get_opt(self, t):

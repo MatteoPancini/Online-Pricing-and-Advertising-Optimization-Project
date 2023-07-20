@@ -1,5 +1,6 @@
 from utils.learners.Learner import Learner
 import numpy as np
+import utils.parameters as param
 
 class UCB(Learner):
     def __init__(self, n_arms):
@@ -9,7 +10,7 @@ class UCB(Learner):
         self.n_samples = np.zeros(n_arms)
 
     def pull_arm(self):
-        upper_conf = (self.empirical_means + self.confidence)#*(param.prices - param.cost)
+        upper_conf = (self.empirical_means + self.confidence)#*(np.array(param.prices) * 0.7)
         return np.random.choice(np.where(upper_conf == upper_conf.max())[0])
 
     def update(self, pulled_arm, reward):
