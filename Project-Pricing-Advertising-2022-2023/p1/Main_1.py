@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 from p1.pricing_environment import *
 from p1.TS_learner import TS_Learner
 from tqdm import tqdm
+import utils.projectParameters as param
 
 # In[62]:
 
@@ -23,7 +24,7 @@ from tqdm import tqdm
 n_arms = 5
 
 uc1 = UserClass(name = "C1")
-costs = [price * 0.3 for price in prices]
+costs = [price * 0.3 for price in param.prices]
 p = uc1.get_conversion_probabilities()
 opt = p[3] #optimal arm is the one with the highest probability of success
 env = Environment_Pricing(n_arms=n_arms, p = p)

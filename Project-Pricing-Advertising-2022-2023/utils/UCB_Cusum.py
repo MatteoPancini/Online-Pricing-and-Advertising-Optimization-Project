@@ -31,6 +31,7 @@ class CusumUCBLearner(UCB5Learner):
                 self.num_converted_per_arm[pulled_arm] = 0
                 self.valid_t_per_arm[pulled_arm] = 0
                 self.change_detection[pulled_arm].reset()
+
         self.valid_t_per_arm[pulled_arm] += 1
         self.update_observations(pulled_arm, reward)
         self.empirical_means[pulled_arm] = self.num_converted_per_arm[pulled_arm] / self.num_total_samples_per_arm[pulled_arm]

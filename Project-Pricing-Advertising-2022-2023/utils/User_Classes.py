@@ -82,3 +82,6 @@ class UserClass():
     def get_cost_per_click(self, bid):
         '''Returns the cost per click for the instanced class'''
         return self.get_total_cost(bid) / self.get_click_bids(bid)
+
+    def get_user_index(self):
+        return self.user_index

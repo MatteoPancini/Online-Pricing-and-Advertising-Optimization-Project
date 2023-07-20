@@ -15,13 +15,13 @@ class GPTS_Learner3(Learner):
         self.pulled_arms = []
         self.collected_clicks = []
         self.collected_costs = []
-        alpha_clicks = 1000
-        kernel_clicks = C(100, (100, 1e6)) * RBF(10, (1e-1, 1e6))
+        alpha_clicks = 1
+        kernel_clicks =  RBF(1.0, (1e-3, 1e3))
         self.gp_clicks = GaussianProcessRegressor(kernel=kernel_clicks, alpha=alpha_clicks, normalize_y=False, n_restarts_optimizer=1)
 
-        alpha_cost = 0.3
-        kernel_cost = C(0.1, (1, 1e2)) * RBF(0.1, (1, 1e2))
-        self.gp_cost = GaussianProcessRegressor(kernel=kernel_cost, alpha=alpha_cost, normalize_y=False, n_restarts_optimizer=1)
+        alpha_costs = 1
+        kernel_costs = RBF(1.0, (1e-3, 1e3))
+        self.gp_cost = GaussianProcessRegressor(kernel=kernel_costs, alpha=alpha_costs, normalize_y=False, n_restarts_optimizer=1)
 
     def update_observations_gpts(self, pulled_arm, clicks, costs):
         # self.rewards_per_arm[pulled_arm].append(reward)

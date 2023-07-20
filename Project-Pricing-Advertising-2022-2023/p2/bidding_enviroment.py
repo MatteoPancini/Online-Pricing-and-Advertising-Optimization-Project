@@ -13,7 +13,7 @@ class BiddingEnvironment:
     def initialize_means(self, user_class, bids, price):
         means = numpy.zeros(len(bids))
         for i in range(len(means)):
-                means[i] = fun(user_class, bids[i], price)
+            means[i] = fun(user_class, bids[i], price)
         return means
 
     def round(self, pulled_arm):

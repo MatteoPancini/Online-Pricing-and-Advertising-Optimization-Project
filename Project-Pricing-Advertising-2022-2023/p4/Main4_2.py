@@ -37,7 +37,7 @@ user_classes = [uc1, uc2, uc3]
 
 
 envs = {feature: Environment(feature) for feature in ['00', '01', '10', '11']}
-opts = {feature: envs[feature].optimal for feature in ['00', '01', '10', '11']}
+opts = {feature: envs[feature].optimal_bid for feature in ['00', '01', '10', '11']}
 n_experiments = 5
 T = 365
 prices = [50, 100, 150, 200, 250]
@@ -193,7 +193,7 @@ plt.show()
 # In[8]:
 
 
-opts = {feature: envs[feature].optimal for feature in ['00', '01', '10', '11']}
+opts = {feature: envs[feature].optimal_bid for feature in ['00', '01', '10', '11']}
 opt = sum(opts.values())
 
 #CONTEXT REGRET CUM
