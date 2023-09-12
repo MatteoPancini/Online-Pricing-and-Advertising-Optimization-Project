@@ -24,17 +24,6 @@ pricing_probabilities_per_user = {
     3: np.array([0.35, 0.30, 0.20, 0.15, 0.10]), # C3 - Giovane Non Appassionato
 }
 
-'''
-pricing_probabilities_per_phase = { # User C1
-    1: np.array([0.15, 0.25, 0.35, 0.2, 0.1]),  # Phase 1: Regular behaviours (best price is the middle one, April) -> 150€
-    # price * probability [12.5, 35, 37.5, 30, 25]
-    2: np.array([0.1, 0.15, 0.25, 0.4, 0.25]),  # Phase 2: Holiday Season (higher price, middle one as good gift, Christmas) -> 200€
-    # price * probability [5, 20, 45, 80, 62.5]
-    3: np.array([0.4, 0.25, 0.12, 0.1, 0.05]),  # Phase 3: Sale Season (second lowest price best one, September) -> 100€
-    # price * probability [20, 25, 18, 16, 12.5]
-}
-
-'''
 # Last used
 pricing_probabilities_per_phase = { # User C1
     1: np.array([0.25, 0.35, 0.25, 0.15, 0.10]),  # Phase 1: Regular behaviours (best price is the middle one, April) -> 150€
