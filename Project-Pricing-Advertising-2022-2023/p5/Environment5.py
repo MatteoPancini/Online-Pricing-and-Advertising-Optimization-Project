@@ -31,9 +31,6 @@ class Environment5:
                                                 (param.prices[self.opt_price_idx[phase]] - param.cost) - self.tot_costs)
 
 
-
-
-
     def round(self, pulled_price_arm, pulled_bid_arm, t):
         phase = min(math.floor(t / self.phase_size) + 1, self.n_phases)
 

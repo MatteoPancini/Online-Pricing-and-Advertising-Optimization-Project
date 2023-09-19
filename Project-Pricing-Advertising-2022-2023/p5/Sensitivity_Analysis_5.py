@@ -28,7 +28,7 @@ print("UCB-SW")
 #%%
 window_sizes = np.array([int(1 * (T ** 0.5)), int(2 * (T ** 0.5)), int(5 * (T ** 0.5)), int(10 * (T ** 0.5)), int(20 * (T ** 0.5))])
 #%%
-plt.figure(4)
+plt.figure(0)
 plt.title("Sliding Window")
 plt.xlabel("t")
 plt.ylabel("Cumulative Regret")
@@ -56,7 +56,7 @@ print("CUSUM-UCB with different M")
 #%%
 Ms = [1, 5, 25, 80, 200]
 #%%
-plt.figure(0)
+plt.figure(1)
 plt.title("Cusum - M trials")
 plt.xlabel("t")
 plt.ylabel("Cumulative Regret")
@@ -84,7 +84,7 @@ print("CUSUM-UCB with different h")
 #%%
 hs = np.array([0.01, 0.1, 0.5, 1, 5]) * np.log(T)
 #%%
-plt.figure(1)
+plt.figure(2)
 plt.title("Cusum - h trials")
 plt.xlabel("t")
 plt.ylabel("Cumulative Regret")
@@ -111,7 +111,7 @@ print("CUSUM-UCB with different eps")
 #%%
 epss = [0.001, 0.01, 0.1, 0.3, 0.5]
 #%%
-plt.figure(2)
+plt.figure(3)
 plt.title("Cusum - eps trials")
 plt.xlabel("t")
 plt.ylabel("Cumulative Regret")
@@ -138,7 +138,7 @@ print("CUSUM-UCB with different alpha")
 #%%
 alphas = np.sqrt(np.array([0.1, 1, 5, 10, 25])) * np.sqrt(np.log(T) / T)
 #%%
-plt.figure(3)
+plt.figure(4)
 plt.title("Cusum - alpha trials")
 plt.xlabel("t")
 plt.ylabel("Cumulative Regret")

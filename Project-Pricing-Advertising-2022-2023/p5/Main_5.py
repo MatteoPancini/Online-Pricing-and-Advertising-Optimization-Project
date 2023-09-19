@@ -42,7 +42,8 @@ cumregret_cusumucb = []
 cumreward_ucb = []
 cumreward_swucb = []
 cumreward_cusumucb = []
-#%%
+
+
 for e in tqdm(range(0, n_experiments)):
     # Create environment and learners
     ucb_optimizer = ucb_opt.UCB_BaseOptimizer_5(ucb.UCB5Learner, user, (n_arms,))
