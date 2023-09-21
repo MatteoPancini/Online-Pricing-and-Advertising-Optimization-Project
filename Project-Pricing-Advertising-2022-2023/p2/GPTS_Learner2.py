@@ -1,4 +1,4 @@
-from GPTS_Learner import *
+from p2.GPTS_Learner import *
 import utils.projectParameters as param
 
 

@@ -5,6 +5,9 @@ from p2.GPUCB_Learner2 import *
 import utils.parameters as param
 from tqdm import tqdm
 
+import warnings
+warnings.filterwarnings('ignore')
+
 
 T = 365
 n_experiments = 15

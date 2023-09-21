@@ -1,6 +1,6 @@
 import numpy as np
-from GPUCB_Learner import *
-from Learner import *
+from p2.GPUCB_Learner import *
+from p2.Learner import *
 import utils.projectParameters as param
 
 
