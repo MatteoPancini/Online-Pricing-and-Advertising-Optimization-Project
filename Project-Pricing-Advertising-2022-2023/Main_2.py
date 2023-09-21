@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
-import Environment2 as env
-from GPTS_Learner2 import *
-from GPUCB_Learner2 import *
+import p2.Environment2 as env
+from p2.GPTS_Learner2 import *
+from p2.GPUCB_Learner2 import *
 import utils.parameters as param
 from tqdm import tqdm
 

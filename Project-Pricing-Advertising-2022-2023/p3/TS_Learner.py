@@ -27,6 +27,6 @@ class TS_Learner(Learner):
         #Updates the beta parameters based on the pulled arm and the reward from the environment.
         self.t +=1
         self.update_observations(pulled_arm, reward)
-        self.beta_parameters[pulled_arm, 0] = self.beta_parameters[pulled_arm,0] + reward
-        self.beta_parameters[pulled_arm,1] = self.beta_parameters[pulled_arm,1] - reward
+        self.beta_parameters[pulled_arm, 0] = self.beta_parameters[pulled_arm,0] + reward[1]
+        self.beta_parameters[pulled_arm,1] = self.beta_parameters[pulled_arm,1] + reward[0]
 

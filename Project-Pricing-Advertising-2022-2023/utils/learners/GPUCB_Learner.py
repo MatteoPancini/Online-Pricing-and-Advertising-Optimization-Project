@@ -10,10 +10,8 @@ class GPUCB_Learner(Learner):
         self.empirical_means = np.zeros(n_arms)
         self.confidence = np.array([np.inf] * n_arms)
         self.pulled_arms = []
-        alpha = 10.0
-        # kernel = C(1.0, (1e-3, 1e3)) * RBF(1.0, (1e-3, 1e3))
-        # kernel_BlueCow
-        kernel = C(100, (100, 1e6)) * RBF(1, (1e-1, 1e1))
+        alpha = 1
+        kernel = RBF(1, (1e-3, 1e3))
         self.gp = GaussianProcessRegressor(kernel=kernel, alpha=alpha ** 2, normalize_y=True, n_restarts_optimizer=9)
 
     def update_observations(self, arm_idx, reward):

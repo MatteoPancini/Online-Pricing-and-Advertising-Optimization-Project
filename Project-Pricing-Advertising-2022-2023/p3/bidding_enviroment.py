@@ -9,13 +9,6 @@ class Bidding_Environment_3:
         self.clicks_sigmas = np.ones(len(bids)) * clicks_sigma
         self.cost_sigmas = np.ones(len(bids)) * cost_sigma
         self.n_arms = n_arms
-
-    #TODO: probabily remove
-    def initialize_means(self, user_class, bids, price):
-        means = np.zeros(len(bids))
-        for i in range(len(means)):
-                means[i] = fun(user_class, bids[i], price)
-        return means
     
     def initialize_clicks(self, user_class, bids):
         means = np.zeros(len(bids))
@@ -30,14 +23,17 @@ class Bidding_Environment_3:
         return means
 
     def round(self, pulled_arm):
-        sample_clicks = np.random.normal(self.clicks_means[pulled_arm], self.clicks_sigmas[pulled_arm])
-        sample_cost = np.random.normal(self.cost_means[pulled_arm], self.cost_sigmas[pulled_arm])
-        #Handle the exceptions
+        sample_clicks = self.clicks_means[pulled_arm] + np.random.normal(0, self.clicks_sigmas[pulled_arm]/10)
+        sample_cost =self.cost_means[pulled_arm]+  np.random.normal(0, self.cost_sigmas[pulled_arm]/10)
+
         if sample_cost > self.bids[pulled_arm]:
             sample_cost = self.bids[pulled_arm]
-        if sample_cost < 0:
-            sample_cost = 0
+
         if int(sample_clicks) < 0:
             sample_clicks = self.clicks_means[pulled_arm]
+        
+        if sample_cost < 0:
+            sample_cost = 0
+            sample_clicks = 0
 
         return int(sample_clicks), sample_cost

@@ -19,12 +19,12 @@ class GPUCB_Learner3(Learner):
         self.collected_clicks = np.array([])
         self.collected_costs = np.array([])
 
-        alpha_clicks = 1
-        kernel_clicks =  RBF(1.0, (1e-3, 1e3))
+        alpha_clicks = 10
+        kernel_clicks =   C(1.0, (1e-3, 1e3)) * RBF(1.0, (1e-3, 1e3))
         self.gp_clicks = GaussianProcessRegressor(kernel=kernel_clicks, alpha=alpha_clicks ** 2, normalize_y=True, n_restarts_optimizer=9)
 
-        alpha_costs = 1
-        kernel_costs = RBF(1.0, (1e-3, 1e3))
+        alpha_costs = 0.5
+        kernel_costs =  C(1.0, (1e-3, 1e3)) * RBF(1.0, (1e-3, 1e3))
         self.gp_costs = GaussianProcessRegressor(kernel=kernel_costs, alpha=alpha_costs, normalize_y=False, n_restarts_optimizer=1)
 
     def update_observations(self, pulled_arm, clicks, costs):
