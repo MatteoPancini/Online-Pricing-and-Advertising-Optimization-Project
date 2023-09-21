@@ -14,7 +14,7 @@ from utils.learners.TS_Learner import TS_Learner
 import warnings
 
 warnings.filterwarnings("ignore")
-# %%
+
 # Environment
 n_arms = 100
 
@@ -39,11 +39,11 @@ for price_index in range(len(prices)):
 optimum_bid_reward = np.max(np.array(opt_vec))
 #print(optimum_bid_reward)  # optimum bid
 
-# %%
+
 # Create Environment
 pr_env = Princing_Environment_3(n_arms, user)
 bid_env = Bidding_Environment_3(bids, clicks_sigma, cost_sigma, user, n_arms)
-# %%
+
 for e in tqdm(range(n_experiments), desc='Number of experiments'):
     # Create Learner
     pricing_learner = TS_Learner(len(prices))
@@ -81,7 +81,7 @@ for e in tqdm(range(n_experiments), desc='Number of experiments'):
         ts_rewards.append(daily_reward)
 
     gpts_rewards_per_experiment.append(ts_rewards)
-# %%
+
 for e in tqdm(range(n_experiments), desc='Number of experiments'):
     # Create Learner
     pricing_learner = TS_Learner(len(prices))
@@ -119,9 +119,9 @@ for e in tqdm(range(n_experiments), desc='Number of experiments'):
         ucb_rewards.append(daily_reward)
 
     gpucb_rewards_per_experiment.append(ucb_rewards)
-# %% md
+
 # Cumulative Regret
-# %%
+
 plt.figure(0)
 plt.ylabel("Cumulative Regret")
 plt.xlabel("t")
@@ -135,9 +135,9 @@ for index, line in enumerate(gpucb_rewards_per_experiment):
              alpha=0.3 / np.power(len(gpts_rewards_per_experiment), 2 / 3))
 plt.legend()
 plt.show()
-# %% md
+
 # Cumulative Reward
-# %%
+
 plt.figure(0)
 plt.ylabel("Cumulative Reward")
 plt.xlabel("t")
@@ -149,9 +149,9 @@ for index, line in enumerate(gpucb_rewards_per_experiment):
     plt.plot(np.nancumsum(line, axis=0), "g", alpha=1 / np.power(len(gpucb_rewards_per_experiment), 2 / 3))
 plt.legend()
 plt.show()
-# %% md
+
 # Istantaneous Regret
-# %%
+
 plt.figure(0)
 plt.ylabel("Istantaneous Regret")
 plt.xlabel("t")
@@ -163,9 +163,9 @@ for index, line in enumerate(gpucb_rewards_per_experiment):
     plt.plot(optimum_bid_reward - line, "g", alpha=0.3 / np.power(len(gpucb_rewards_per_experiment), 2 / 3))
 plt.legend()
 plt.show()
-# %% md
+
 # Instantaneous Reward
-# %%
+
 plt.figure(0)
 plt.ylabel("Istantaneous Reward")
 plt.xlabel("t")
