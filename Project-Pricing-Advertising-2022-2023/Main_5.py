@@ -2,14 +2,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-import Environment5 as env
+import p5.Environment5 as env
 import utils.UCB_Opt5 as ucb_opt
 import utils.UCB5 as ucb
 import utils.UCB_SW as swucb
 import utils.UCB_Cusum as cusumucb
 from utils.User_Classes import UserClass
 
-#%%
 T = 365
 
 user = UserClass(name='C1')
@@ -30,7 +29,6 @@ eps = 0.01
 h = 0.5 * np.log(T)
 alpha = np.sqrt(5 * np.log(T) / T)
 
-#%%
 ucb_rewards_per_experiment = []
 swucb_rewards_per_experiment = []
 cusumucb_rewards_per_experiment = []
@@ -78,9 +76,8 @@ for e in tqdm(range(0, n_experiments)):
     cumreward_ucb.append(np.cumsum(ucb_rewards_per_experiment[e]))
     cumreward_swucb.append(np.cumsum(swucb_rewards_per_experiment[e]))
     cumreward_cusumucb.append(np.cumsum(cusumucb_rewards_per_experiment[e]))
-#%% md
 ## Cumulative Regret
-#%%
+
 plt.figure(0)
 plt.xlabel("t")
 plt.ylabel("Cumulative Regret")
@@ -95,9 +92,9 @@ plt.fill_between(range(T), np.mean(cumregret_cusumucb, axis=0) - np.std(cumregre
                  np.mean(cumregret_cusumucb, axis=0) + np.std(cumregret_cusumucb, axis=0), color="b", alpha=0.2)
 plt.legend(["UCB", "SW-UCB", "CUSUM-UCB"])
 plt.show()
-#%% md
+
 ## Instantaneous Regret
-#%%
+
 plt.figure(1)
 plt.xlabel("t")
 plt.ylabel("Instantaneous Regret")
@@ -120,9 +117,9 @@ plt.fill_between(range(T),
                                                                                  axis=0), color="b", alpha=0.3)
 plt.legend(["UCB", "SW-UCB", "CUSUM-UCB"])
 plt.show()
-#%% md
+
 ## Cumulative Reward
-#%%
+
 plt.figure(2)
 plt.xlabel("t")
 plt.ylabel("Cumulative Reward")
@@ -137,9 +134,8 @@ plt.fill_between(range(T), np.mean(cumreward_cusumucb, axis=0) - np.std(cumrewar
                  np.mean(cumreward_cusumucb, axis=0) + np.std(cumreward_cusumucb, axis=0), color="b", alpha=0.3)
 plt.legend(["UCB", "SW-UCB", "CUSUM-UCB"])
 plt.show()
-#%% md
+
 ## Instantaneous Reward
-#%%
 plt.figure(3)
 plt.xlabel("t")
 plt.ylabel("Instantaneous Reward")
