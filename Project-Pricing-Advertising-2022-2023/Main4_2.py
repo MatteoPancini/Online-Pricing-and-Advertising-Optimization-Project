@@ -1,7 +1,6 @@
 # # Contexts and their generation
 # ## Scenario 2
 
-# In[1]:
 
 
 import numpy as np
@@ -21,7 +20,6 @@ import warnings
 warnings.filterwarnings("ignore", message="The optimal value found*")
 
 
-# In[2]:
 
 
 uc1 = UserClass(name = "C1")
@@ -33,11 +31,10 @@ user_classes = [uc1, uc2, uc3]
 
 # ## Experiments
 
-# In[3]:
 
 
 envs = {feature: Environment(feature) for feature in ['00', '01', '10', '11']}
-opts = {feature: envs[feature].optimal_bid for feature in ['00', '01', '10', '11']}
+opts = {feature: envs[feature].optimal for feature in ['00', '01', '10', '11']}
 n_experiments = 5
 T = 365
 prices = [50, 100, 150, 200, 250]
@@ -122,7 +119,6 @@ std_cum_reward_ucb_context = np.std(context_ucb_rewards_per_experiment, axis=0)
 std_cum_reward_ucb_no_context = np.std(no_context_ucb_rewards_per_experiment, axis=0)
 
 
-# In[4]:
 
 
 # CONTEXT TS REWARD IST
@@ -139,9 +135,6 @@ plt.legend()
 plt.show()
 
 
-# In[5]:
-
-
 # NO CONTEXT TS REWARD IST
 plt.plot(range(1, T+1), mean_cum_reward_ts_no_context, 'b', label='TS')
 plt.fill_between(range(1, T+1), mean_cum_reward_ts_no_context - std_cum_reward_ts_no_context, mean_cum_reward_ts_no_context + std_cum_reward_ts_no_context, alpha=0.2, color='b')
@@ -156,7 +149,6 @@ plt.legend()
 plt.show()
 
 
-# In[6]:
 
 
 # CONTEXT TS REWARD CUM
@@ -173,8 +165,6 @@ plt.legend()
 plt.show()
 
 
-# In[7]:
-
 
 # NO CONTEXT TS REWARD CUM
 plt.ylabel("Cumulative Reward, no context")
@@ -190,10 +180,8 @@ plt.legend()
 plt.show()
 
 
-# In[8]:
 
-
-opts = {feature: envs[feature].optimal_bid for feature in ['00', '01', '10', '11']}
+opts = {feature: envs[feature].optimal for feature in ['00', '01', '10', '11']}
 opt = sum(opts.values())
 
 #CONTEXT REGRET CUM
@@ -216,8 +204,6 @@ plt.xlabel("Time")
 plt.legend()
 plt.show()
 
-
-# In[9]:
 
 
 #NO CONTEXT REGRET CUM
@@ -242,9 +228,6 @@ plt.legend()
 plt.show()
 
 
-# In[10]:
-
-
 # CONTEXT REGRET IST
 mean_inst_regret_ts = opt - np.mean(np.array(context_ts_rewards_per_experiment), axis=0)
 std_inst_regret_ts = np.std(opt - np.array(context_ts_rewards_per_experiment), axis=0)
@@ -262,9 +245,6 @@ plt.fill_between(range(len(mean_inst_regret_ucb)), mean_inst_regret_ucb - std_in
 #plt.plot(np.mean(opt - np.array(ts_rewards_per_experiment), axis=0), 'r', label='TS')
 plt.legend()
 plt.show()
-
-
-# In[11]:
 
 
 # NO CONTEXT REGRET IST

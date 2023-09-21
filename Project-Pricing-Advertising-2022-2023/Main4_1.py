@@ -16,7 +16,6 @@
 # 
 # Furthermore, in the second scenario, run the GP-UCB and GP-TS algorithms without context generation, and therefore forcing the context to be only one for the entire time horizon, and compare their performance with the performance of the previous algorithms used for the second scenario.
 
-# In[1]:
 
 
 import numpy as np
@@ -34,7 +33,6 @@ import warnings
 warnings.filterwarnings("ignore", message="The optimal value found*")
 
 
-# In[2]:
 
 
 uc1 = UserClass(name = "C1")
@@ -48,7 +46,7 @@ user_classes = [uc1, uc2, uc3]
 
 # ### First scenario
 
-# In[3]:
+
 
 
 n_arms = 10
@@ -74,7 +72,6 @@ ts_rewards_per_experiment = [] #list to store the collected rewards for TS_Learn
 ucb_rewards_per_experiment = [] #list to store the collected rewards for Greedy_Learner over each experiment
 
 
-# In[4]:
 
 
 #for each experiment, for each day, for each class
@@ -112,7 +109,6 @@ mean_cum_reward_ucb = np.mean(ucb_rewards_per_experiment, axis=0)
 std_cum_reward_ucb = np.std(ucb_rewards_per_experiment, axis=0)
 
 
-# In[5]:
 
 
 # Plot the results
@@ -130,7 +126,6 @@ plt.legend()
 plt.show()
 
 
-# In[6]:
 
 
 plt.ylabel("Cumulative Reward")
@@ -147,7 +142,6 @@ plt.legend()
 plt.show()
 
 
-# In[7]:
 
 
 from utils.clairvoyant_tools import get_optimal_parameters
@@ -177,7 +171,6 @@ plt.legend(["TS","UCB"])
 plt.show()
 
 
-# In[8]:
 
 
 mean_inst_regret_ts = opt - np.mean(np.array(ts_rewards_per_experiment), axis=0)
